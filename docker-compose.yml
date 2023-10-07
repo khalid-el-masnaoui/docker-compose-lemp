@@ -13,8 +13,6 @@ services:
                 GID: ${XGID}
         container_name: ${APP_NAME:?err}-nginx
         #user: "${XUID}:${XGID}"
-        links:
-            - php
         ports:
             - 8080:80
             - 443:443
@@ -32,6 +30,7 @@ services:
     #Php-Fpm service
     php:
         image: 'php:8.2-fpm'
+        container_name: ${APP_NAME:?err}-php
         ports:
             - '9000:9000'
         volumes:
