@@ -1,3 +1,8 @@
+<?php
+
+echo "This message is from php-fpm";
+
+?>
 <!DOCTYPE html>
 <html>
 <body>
