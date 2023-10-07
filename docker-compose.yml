@@ -12,6 +12,14 @@ services:
                 UID: ${XUID} #UID is a read-only variable in bash (reserved variable)
                 GID: ${XGID}
         container_name: ${APP_NAME:?err}-nginx
+        #user: "${XUID}:${XGID}"
         ports:
             - 8080:80
             - 443:443
+        volumes:
+            - type: bind
+              source: src/
+              target: /var/www/html
+            - type: bind
+              source: logs/nginx/
+              target: /var/log/nginx/
