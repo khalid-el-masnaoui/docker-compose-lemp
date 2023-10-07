@@ -1,5 +1,7 @@
 <?php
 
+phpinfo();
+
 echo "This message is from php-fpm";
 
 ?>

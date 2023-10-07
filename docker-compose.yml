@@ -3,7 +3,7 @@ version: '3.8'
 # Services
 services:
 
-    # Nginx Service
+    #Nginx Service
     nginx:
         build:
             context: .
@@ -27,9 +27,14 @@ services:
               source: logs/nginx/
               target: /var/log/nginx/
 
-    #Php-Fpm service
+    #Php-fpm service
     php:
-        image: 'php:8.2-fpm'
+        build:
+            context: .
+            dockerfile: docker/php.Dockerfile
+            args:
+                UID: ${XUID} #UID is a read-only variable in bash (reserved variable)
+                GID: ${XGID}
         container_name: ${APP_NAME:?err}-php
         ports:
             - '9000:9000'
