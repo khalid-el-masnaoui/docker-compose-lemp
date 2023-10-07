@@ -19,8 +19,8 @@ RUN groupmod -g $GID www-data
 #ADD directories
 RUN mkdir /etc/nginx/sites-available && mkdir /etc/nginx/sites-enabled
 
-#COPY configurations/nginx.conf /etc/nginx/nginx.conf
-#COPY configurations/sites-available /etc/nginx/sites-available
+COPY configurations/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY configurations/nginx/sites-available /etc/nginx/sites-available
 COPY --chown=www-data:www-data src/ /var/www/html/
  
 #ADD sumbolic linlk

@@ -14,3 +14,4 @@ services:
         container_name: ${APP_NAME:?err}-nginx
         ports:
             - 8080:80
+            - 443:443
