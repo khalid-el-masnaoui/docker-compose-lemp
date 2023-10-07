@@ -21,5 +21,12 @@ services:
               source: src/
               target: /var/www/html
             - type: bind
+              source: configurations/nginx/sites-enabled
+              target: /etc/nginx/sites-enabled
+            - type: bind
               source: logs/nginx/
               target: /var/log/nginx/
+
+    #Php-Fpm service
+   # php:
+
