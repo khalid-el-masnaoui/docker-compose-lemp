@@ -5,7 +5,12 @@ services:
 
     # Nginx Service
     nginx:
-        image: nginx:latest
+        build:
+            context: .
+            dockerfile: docker/nginx.Dockerfile
+            args:
+                UID: ${XUID} #UID is a read-only variable in bash (reserved variable)
+                GID: ${XGID}
         container_name: ${APP_NAME:?err}-nginx
         ports:
             - 8080:80
