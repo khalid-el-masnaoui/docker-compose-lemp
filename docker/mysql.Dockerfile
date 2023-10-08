@@ -22,8 +22,8 @@ EXPOSE 3306
 RUN chown -R mysql:mysql /var/lib/mysql
 
 #logs
-#RUN install -o mysql -g mysql -d /var/log/mysql && \
-#    install -o mysql -g mysql /dev/null /var/log/mysql/error.log && \
-#    install -o mysql -g mysql /dev/null /var/log/mysql/slow.log
+RUN install -o mysql -g mysql -d /var/log/mysql && \
+    install -o mysql -g mysql /dev/null /var/log/mysql/error.log && \
+    install -o mysql -g mysql /dev/null /var/log/mysql/slow.log
 
 USER mysql

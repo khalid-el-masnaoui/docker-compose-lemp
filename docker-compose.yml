@@ -63,3 +63,7 @@ services:
             - '3306:3306'
         env_file:
             - '.env'
+        volumes:
+            - type: bind
+              source: logs/mysql/
+              target: /var/log/mysql/
