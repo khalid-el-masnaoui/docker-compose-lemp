@@ -26,6 +26,8 @@ services:
             - type: bind
               source: logs/nginx/
               target: /var/log/nginx/
+        networks:
+            - custom-network
 
     #Php-fpm service
     php:
@@ -48,6 +50,8 @@ services:
             - type: bind
               source: logs/php/
               target: /var/log/php/
+        networks:
+            - custom-network
 
     #Mysql service
     mysql:
@@ -70,7 +74,13 @@ services:
               target: /var/log/mysql/
             - "./docker/initScripts/:/docker-entrypoint-initdb.d/"
             - 'mysqldata:/var/lib/mysql'
+        networks:
+            - custom-network
 
-# Volumes
+#Volumes
 volumes:
-  mysqldata:
+    mysqldata:
+
+#Networks  
+networks:
+    custom-network:
