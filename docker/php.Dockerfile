@@ -92,8 +92,16 @@ EXPOSE 9000
 # PID directory
 RUN install -d -m 0755 -o www-data -g www-data /run/php-fpm
 
-#custom fpm configs
+#custom php configs
 COPY ./configurations/php/ /usr/local/etc/
+COPY ./configurations/php/php/php.ini  /usr/local/etc/php/
+COPY ./configurations/php/php/mods-available/opcache.ini  /usr/local/etc/php/conf.d/
+
+#disable the default opcache.ini
+RUN mv /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini /usr/local/etc/php/conf.d/odocker-php-ext-pcache.ini.disabled
+
+# Default sessions directory
+RUN install -d -m 0755 -o www-data -g www-data /var/lib/php/sessions
 
 #php logs
 RUN install -o www-data -g www-data -d /var/log/php && \
@@ -104,5 +112,7 @@ RUN install -o www-data -g www-data -d /var/log/php && \
 #clean dirs
 RUN  apt-get clean && \
     rm -rf var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+WORKDIR /var/www/html    
 
 USER www-data
