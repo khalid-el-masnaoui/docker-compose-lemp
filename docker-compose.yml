@@ -59,6 +59,7 @@ services:
                 GID: ${XGID}
         #command: mysqld --init-file="/docker-entrypoint-initdb.d/init.sql"
         container_name: ${APP_NAME:?err}-mysql 
+        restart: on-failure
         ports:
             - '3306:3306'
         env_file:
