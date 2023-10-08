@@ -153,6 +153,9 @@ $ cd docker-compose-lemp
 
 #build and start the services
 $ docker-compose up -d --build
+
+#accessing the services containers
+$ docker exec -it {service-name} /bin/bash
 ```
 
 This will create the custom lemp stack containers pull-in/install the necessary dependencies.
