@@ -109,7 +109,7 @@ You can also set the following environment variables, for example in the include
 ## Docker :hammer_and_wrench:
 
 ##### Exposed and Mapped Ports
-Nginx is exposig ports _80/tcp_ and _443/tcp_, while php-fpm is exposing port 9000/tcp in case of listening to tcp connection (the current behavious is that php-fpm is listening to the unix socket connections), MySql is listening on port _3306/tcp_.
+Nginx is exposig ports _80/tcp_ and _443/tcp_, while php-fpm is exposing port 9000/tcp in case of listening to tcp connection (the current behaviour is that php-fpm is listening to the unix socket connections), MySql is listening on port _3306/tcp_.
 
 Ports mapping is specified in the _docker-compose_ file as : 
 ```
@@ -139,6 +139,9 @@ $ export XGID=$(id -g)
 $ source ~/.bashrc # or '. ~/.bashrc'
 ```
 
+##### Networking
+The lemp containers are sharing the same network under docker-compsoe called _custom-network_
+
 #####  Installation  :electric_plug:
 Clone this repository and follow the simple steps:
 ```bash
@@ -146,8 +149,19 @@ Clone this repository and follow the simple steps:
 $ git clone git@github.com:khalid-el-masnaoui/docker-compose-lemp.git
 
 #cd into the working diretcory
-cd docker-compose-lemp
+$ cd docker-compose-lemp
 
-#build
-docker-compose up -d --build
+#build and start the services
+$ docker-compose up -d --build
 ```
+
+This will create the custom lemp stack containers pull-in/install the necessary dependencies.
+
+Verify the deployment by navigating to your server address in your preferred browser.
+
+
+```sh
+localhost:8080 # should display phpinfo page -> verify all extensions enabled such as opcache , jit , apcu , redis ...
+localhost:8080/test_db.php # verify the connection to mysql database is working correctly and retrive some data from the database
+```
+
