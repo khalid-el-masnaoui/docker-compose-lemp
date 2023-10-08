@@ -42,3 +42,6 @@ services:
             - type: bind
               source: src/
               target: /var/www/html
+            - type: bind
+              source: logs/php/
+              target: /var/log/php/
