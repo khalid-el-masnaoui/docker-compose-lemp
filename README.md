@@ -9,6 +9,31 @@ The following versions are used.
 - Nginx 1.25.2 (latest-tag)
 - MySql 8.0.34
 
+## Extensions :sparkles:
+
+The custom php image image includes all the following extensions (installed and enabled).
+
+| Extension | README |
+| ------ | ------ |
+| **Redis** | [Github Repository](https://github.com/redis/redis) |
+| **Memcached** | [Github Repository](https://github.com/memcached/memcached) |
+| **Apcu** | [PHP Manual](https://www.php.net/manual/en/book.apcu.php) |
+| **Mcrypt** | [PHP Manual](https://www.php.net/manual/en/book.mcrypt.php) |
+| **Iconv** | [PHP Manual](https://www.php.net/manual/en/function.iconv.php) |
+| **Mbstring** | [PHP Manual](https://www.php.net/manual/en/book.mbstring.php) |
+| **Mysqli** | [PHP Manual](https://www.php.net/manual/en/book.mysqli.php) |
+| **Pdo_mysql** | [PHP Manual](https://www.php.net/manual/en/ref.pdo-mysql.php) |
+| **Sockets** | [PHP Manual](https://www.php.net/manual/en/book.sockets.php) |
+| **Zip** | [PHP Manual](https://www.php.net/manual/en/book.zip.php) |
+| **Pcntl** | [PHP Manual](https://www.php.net/manual/en/book.pcntl.php) |
+| **Ftp** | [PHP Manual](https://www.php.net/manual/en/book.ftp.php) |
+| **Bcmath** | [PHP Manual](https://www.php.net/manual/en/book.bc.php) |
+| **Intl** | [PHP Manual](https://www.php.net/manual/en/book.intl.php) |
+| **Gettext** | [PHP Manual](https://www.php.net/manual/en/function.gettext.php) |
+And many others, you can discover them by yourself :eyes:
+
+In addition of the above extension , this php-cli image includes _**Composer**_ and _**PhpUnit**_ as well, installed globally, and such as _wget_, _vim_, _git_, _unzip_ ...
+
 ## File Structure :open_file_folder:
 This repository is organized following  the below file structure
 ```bash
@@ -79,5 +104,4 @@ You can also set the following environment variables, for example in the include
 |APP_NAME|The name used when creating a container.|
 |MYSQL_ROOT_PASSWORD|The MySQL root password used when creating the container.|
 |MYSQL_DATABASE|The MySQL database used when creating the container.|
-
 
