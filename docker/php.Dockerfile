@@ -16,6 +16,77 @@ ARG GID
 RUN usermod -u $UID www-data
 RUN groupmod -g $GID www-data
 
+# Install PHP extensions deps
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y \
+        libmcrypt-dev \
+        zlib1g-dev \
+        libicu-dev \
+        g++ \
+        unixodbc-dev \
+        libxml2-dev \
+        libaio-dev \
+        libmemcached-dev \
+        freetds-dev \
+        libonig-dev \
+        libfreetype-dev \
+		libjpeg62-turbo-dev \
+		libpng-dev \
+	libssl-dev \
+	libzip-dev \
+	openssl \
+	curl \
+    wget \
+        vim \
+        git \
+        unzip
+
+# Install PHP extensions
+RUN pecl install redis \
+    && pecl install memcached \
+    && pecl install mcrypt \
+    && docker-php-ext-install \
+            iconv \
+            mbstring \
+            intl \
+            gd \
+            mysqli \
+            pdo_mysql \
+            sockets \
+            zip \
+            pcntl \
+            ftp \
+            bcmath \
+            gettext \
+    && docker-php-ext-enable \
+            mcrypt \
+            redis \
+            memcached \
+            opcache
+
+
+# Install Composer
+#traditional
+#RUN install -d -m 0755 -o www-data -g www-data /.composer
+#RUN curl -sS https://getcomposer.org/installer | php -- \
+#        --install-dir=/usr/local/bin \
+#        --filename=composer
+#RUN chown -R www-data:www-data /.composer
+
+#using multistage 
+RUN install -d -m 0755 -o www-data -g www-data ~/.composer
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+RUN chown -R www-data:www-data ~/.composer
+
+#add apcu
+RUN pecl install apcu \
+  && docker-php-ext-enable apcu
+
+# Install PHPUnit Globaly
+RUN wget https://phar.phpunit.de/phpunit.phar -O /usr/local/bin/phpunit \
+    && chmod +x /usr/local/bin/phpunit
+
+
 EXPOSE 9000
 
 # PID directory
@@ -24,10 +95,11 @@ RUN install -d -m 0755 -o www-data -g www-data /run/php-fpm
 #custom fpm configs
 COPY ./configurations/php/ /usr/local/etc/
 
-#fpm logs
-RUN install -d -o www-data -g www-data /var/log/php && \
-    install -o www-data -g www-data /dev/null /var/log/php/php-fpm.log
-
+#php logs
+RUN install -o www-data -g www-data -d /var/log/php && \
+    install -o www-data -g www-data /dev/null /var/log/php/error.log && \ 
+    install -o www-data -g www-data /dev/null /var/log/php/php-fpm.log && \
+    chown -R www-data:www-data /var/www
 
 #clean dirs
 RUN  apt-get clean && \
