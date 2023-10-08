@@ -109,7 +109,7 @@ You can also set the following environment variables, for example in the include
 ## Docker :hammer_and_wrench:
 
 ##### Exposed and Mapped Ports
-Nginx is exposig ports _80/tcp_ and _443/tcp_, while php-fpm is exposing port 9000/tcp in case of listening to tcp connection (the current behaviour is that php-fpm is listening to the unix socket connections), MySql is listening on port _3306/tcp_.
+Nginx is exposig ports _80/tcp_ and _443/tcp_, while php-fpm is exposing port 9000/tcp in case of listening to tcp connection (the current behaviour is that php-fpm is listening to the **_unix socket connections_**), MySql is listening on port _3306/tcp_.
 
 Ports mapping is specified in the _docker-compose_ file as : 
 ```
