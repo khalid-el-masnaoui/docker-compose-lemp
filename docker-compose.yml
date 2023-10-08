@@ -38,6 +38,8 @@ services:
         container_name: ${APP_NAME:?err}-php
         ports:
             - '9000:9000'
+        env_file:
+            - '.env'
         volumes:
             - type: bind
               source: src/
@@ -59,5 +61,5 @@ services:
         container_name: ${APP_NAME:?err}-mysql 
         ports:
             - '3306:3306'
-        environment:
-            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?err}
+        env_file:
+            - '.env'

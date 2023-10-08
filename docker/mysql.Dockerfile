@@ -12,11 +12,8 @@ ARG GID
 RUN usermod -u $UID mysql
 RUN groupmod -g $GID mysql
 
-# Add a database
-ENV MYSQL_DATABASE khalid
-
 COPY docker/initScripts/ /docker-entrypoint-initdb.d/
-#COPY ./configurations/custom.cnf /etc/mysql/conf.d/
+COPY ./configurations/mysql/custom.cnf /etc/mysql/conf.d/
 
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
