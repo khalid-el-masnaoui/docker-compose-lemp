@@ -14,8 +14,8 @@ services:
         container_name: ${APP_NAME:?err}-nginx
         #user: "${XUID}:${XGID}"
         ports:
-            - 8080:80
-            - 443:443
+            - '8080:80'
+            - '443:443'
         volumes:
             - type: bind
               source: src/
@@ -46,3 +46,18 @@ services:
             - type: bind
               source: logs/php/
               target: /var/log/php/
+
+    #Mysql service
+    mysql:
+        build:
+            context: .
+            dockerfile: docker/mysql.Dockerfile
+            args:
+                UID: ${XUID} #UID is a read-only variable in bash (reserved variable)
+                GID: ${XGID}
+        command: mysqld --init-file="/docker-entrypoint-initdb.d/init.sql"
+        container_name: ${APP_NAME:?err}-mysql 
+        ports:
+            - '3306:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?err}
