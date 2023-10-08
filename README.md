@@ -105,3 +105,49 @@ You can also set the following environment variables, for example in the include
 |MYSQL_ROOT_PASSWORD|The MySQL root password used when creating the container.|
 |MYSQL_DATABASE|The MySQL database used when creating the container.|
 
+
+## Docker :hammer_and_wrench:
+
+##### Exposed and Mapped Ports
+Nginx is exposig ports _80/tcp_ and _443/tcp_, while php-fpm is exposing port 9000/tcp in case of listening to tcp connection (the current behavious is that php-fpm is listening to the unix socket connections), MySql is listening on port _3306/tcp_.
+
+Ports mapping is specified in the _docker-compose_ file as : 
+```
+0.0.0.0:8080->80/tcp #Nginx 80
+0.0.0.0:443->443/tcp #Nginx 443
+0.0.0.0:9000->9000/tcp #php-fpm 9000
+0.0.0.0:3306->3306/tcp #mysql 3306
+```
+Change the above mappings as per your need.
+
+##### UID and GID Mappings
+We are mapping the container user UID and groub GID with the host UID/GID to make shared files (via volumes) accessibles.
+The _docker-compose_ file is using two environment variables to map the UID and GID as below:
+
+```bash
+UID: ${XUID} #UID is a read-only variable in bash (reserved variable- hence the namig XUID)
+GID: ${XGID}
+```
+
+Before you build and run the project, make sure to map the correct values by settting the two environment variable (_XUID_ and _XGID_). There are many ways to do so (put the variables in the build command itself, Variable export..), but we recommand to store the variables in the config so they can be permannent using:
+```bash
+# To your ~/.bashrc file append these two lines:
+$ export XUID=$(id -u) 
+$ export XGID=$(id -g)
+
+#Then refresh the file (or open a new terminal):
+$ source ~/.bashrc # or '. ~/.bashrc'
+```
+
+#####  Installation  :electric_plug:
+Clone this repository and follow the simple steps:
+```bash
+# clone
+$ git clone git@github.com:khalid-el-masnaoui/docker-compose-lemp.git
+
+#cd into the working diretcory
+cd docker-compose-lemp
+
+#build
+docker-compose up -d --build
+```
