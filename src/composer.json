@@ -1,0 +1,15 @@
+{
+    "name": "malidkha/docker_compose_lemp",
+    "autoload": {
+        "psr-4": {
+            "Malidkha\\DockerComposeLemp\\": "."
+        }
+    },
+    "authors": [
+        {
+            "name": "khalid-masnaoui",
+            "email": "elmasnaoui.khalid1@gmail.com"
+        }
+    ],
+    "require": {}
+}

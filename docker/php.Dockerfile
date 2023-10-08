@@ -92,7 +92,8 @@ EXPOSE 9000
 # PID directory
 RUN install -d -m 0755 -o www-data -g www-data /run/php-fpm
 
-#custom php configs
+#custom php configs & source code
+COPY --chown=www-data:www-data src/ /var/www/html/
 COPY ./configurations/php/ /usr/local/etc/
 COPY ./configurations/php/php/php.ini  /usr/local/etc/php/
 COPY ./configurations/php/php/mods-available/opcache.ini  /usr/local/etc/php/conf.d/
@@ -116,3 +117,12 @@ RUN  apt-get clean && \
 WORKDIR /var/www/html    
 
 USER www-data
+
+RUN composer install \
+    --no-interaction \
+    --no-plugins \
+    --no-scripts \
+    --no-dev \
+    --prefer-dist
+
+RUN composer dump-autoload --optimize
