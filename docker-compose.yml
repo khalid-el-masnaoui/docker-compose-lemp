@@ -55,7 +55,8 @@ services:
         networks:
             - custom-network
         depends_on:
-            - mysql
+            mysql:
+                condition: service_healthy
 
     #Mysql service
     mysql:
@@ -80,6 +81,10 @@ services:
             - 'mysqldata:/var/lib/mysql'
         networks:
             - custom-network
+        healthcheck:
+            test: mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD
+            interval: 5s
+            retries: 10
 
 #Volumes
 volumes:
