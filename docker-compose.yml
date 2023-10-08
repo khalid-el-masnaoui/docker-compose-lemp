@@ -57,7 +57,7 @@ services:
             args:
                 UID: ${XUID} #UID is a read-only variable in bash (reserved variable)
                 GID: ${XGID}
-        command: mysqld --init-file="/docker-entrypoint-initdb.d/init.sql"
+        #command: mysqld --init-file="/docker-entrypoint-initdb.d/init.sql"
         container_name: ${APP_NAME:?err}-mysql 
         ports:
             - '3306:3306'
@@ -67,3 +67,4 @@ services:
             - type: bind
               source: logs/mysql/
               target: /var/log/mysql/
+            - "./docker/initScripts/:/docker-entrypoint-initdb.d/"
