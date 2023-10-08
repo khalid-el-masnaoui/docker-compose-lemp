@@ -28,6 +28,8 @@ services:
               target: /var/log/nginx/
         networks:
             - custom-network
+        depends_on:
+            - php
 
     #Php-fpm service
     php:
@@ -52,6 +54,8 @@ services:
               target: /var/log/php/
         networks:
             - custom-network
+        depends_on:
+            - mysql
 
     #Mysql service
     mysql:
