@@ -68,3 +68,8 @@ services:
               source: logs/mysql/
               target: /var/log/mysql/
             - "./docker/initScripts/:/docker-entrypoint-initdb.d/"
+            - 'mysqldata:/var/lib/mysql'
+
+# Volumes
+volumes:
+  mysqldata:
