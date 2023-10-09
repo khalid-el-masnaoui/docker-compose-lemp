@@ -37,8 +37,8 @@ In addition of the above extension , this php-cli image includes _**Composer**_ 
 ## File Structure :open_file_folder:
 This repository is organized following  the below file structure
 ```bash
-├── configurations                        
-│   ├── ==mysql==
+├── configurations                          #Configurations folder
+│   ├── mysql
 │   │   └── custom.cnf
 │   ├── nginx
 │   │   ├── nginx.conf
@@ -53,13 +53,13 @@ This repository is organized following  the below file structure
 │       └── pool.d
 │           ├── www.conf
 │           └── zz-docker.conf
-├── docker                               
+├── docker                                  #Docker files and database scripts
 │   ├── initScripts
 │   │   └── init.sql
 │   ├── mysql.Dockerfile
 │   ├── nginx.Dockerfile
 │   └── php.Dockerfile
-├── logs
+├── logs                                    #Services logs
 │   ├── mysql
 │   │   ├── error.log
 │   │   └── slow.log
@@ -77,8 +77,8 @@ This repository is organized following  the below file structure
 │   │   └─ composer.lock
 │   │   └── index.php
 │   │   └── test_db.php
-├── .env
-├──  docker-compose.yml
+├── .env                                    #Environement variables file
+├──  docker-compose.yml                     
 ├── .dockerignore
 ├── .gitignore
 ├──  README.md
