@@ -38,7 +38,7 @@ In addition of the above extension , this php-cli image includes _**Composer**_ 
 This repository is organized following  the below file structure
 ```bash
 ├── configurations                        
-│   ├── mysql
+│   ├── [mysql](#d)
 │   │   └── custom.cnf
 │   ├── nginx
 │   │   ├── nginx.conf
@@ -69,19 +69,19 @@ This repository is organized following  the below file structure
 │   │   └── error.log
 │   │   └── .gitignore
 │   └── php
-│       ├── error.log
-│       └── php-fpm.log
+│   │   └── error.log
+│   │   └── php-fpm.log
 │   │   └── .gitignore
 └── src
-│       ├── composer.json
-│       ├── composer.lock
-│       ├── index.php
-│       ├── test_db.php
+│   │   └── composer.json
+│   │   └─ composer.lock
+│   │   └── index.php
+│   │   └── test_db.php
 ├── .env
-├── docker-compose.yml
+├──  docker-compose.yml
 ├── .dockerignore
 ├── .gitignore
-├── README.md
+├──  README.md
 ```
 
 
