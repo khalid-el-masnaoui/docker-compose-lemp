@@ -38,7 +38,7 @@ In addition of the above extension , this php-cli image includes _**Composer**_ 
 This repository is organized following  the below file structure
 ```bash
 ├── configurations                        
-│   ├── [mysql](#d)
+│   ├── ==mysql==
 │   │   └── custom.cnf
 │   ├── nginx
 │   │   ├── nginx.conf
