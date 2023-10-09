@@ -26,6 +26,7 @@ services:
             - type: bind
               source: logs/nginx/
               target: /var/log/nginx/
+            - 'php-socket:/var/run/php-fpm'
         networks:
             - custom-network
         depends_on:
@@ -52,6 +53,7 @@ services:
             - type: bind
               source: logs/php/
               target: /var/log/php/
+            - 'php-socket:/run/php-fpm'
         networks:
             - custom-network
         depends_on:
@@ -78,7 +80,7 @@ services:
               source: logs/mysql/
               target: /var/log/mysql/
             - "./docker/initScripts/:/docker-entrypoint-initdb.d/"
-            - 'mysqldata:/var/lib/mysql'
+            - 'mysql-data:/var/lib/mysql'
         networks:
             - custom-network
         healthcheck:
@@ -88,7 +90,8 @@ services:
 
 #Volumes
 volumes:
-    mysqldata:
+    mysql-data:
+    php-socket:
 
 #Networks  
 networks:
